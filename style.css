@@ -85,3 +85,4 @@ a{color:var(--navy);text-decoration-color:var(--amber);text-decoration-thickness
 .fcol a:not(.brand){display:block;color:#DCE4EF;text-decoration:none;padding:.15rem 0}.fcol a:hover{color:var(--amber)}
 .site-footer .fine{border-top:1px solid rgba(255,255,255,.12);margin-top:1.8rem;padding-top:1.1rem;font-size:.82rem}.fine a{color:#DCE4EF}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.band .lm h3{color:var(--navy)}

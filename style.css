@@ -56,3 +56,10 @@ footer p{max-width:80ch}
 table{border-collapse:collapse;width:100%;font-size:.95rem;display:block;overflow-x:auto}
 th,td{border:1px solid var(--line);padding:.45rem .6rem;text-align:left;vertical-align:top}
 th{background:#eef1f5;color:var(--navy)}
+.ml-form{display:flex;flex-direction:column;gap:.55rem;margin-top:auto;padding-top:.6rem}
+.ml-lbl{font-size:0;display:block}.ml-lbl input{width:100%;box-sizing:border-box;font:500 1rem Inter,sans-serif;padding:.7rem .85rem;border:1.5px solid var(--line);border-radius:10px;background:var(--off);color:var(--ink)}
+.ml-lbl input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(242,165,65,.35)}
+.ml-gdpr{display:flex;gap:.45rem;align-items:flex-start;font-size:.78rem;line-height:1.35;color:var(--muted)}.ml-gdpr input{margin-top:.15rem;accent-color:var(--navy)}
+.ml-form .btn{border:0;cursor:pointer;align-self:flex-start}.ml-form .btn:disabled{opacity:.6;cursor:wait}
+.ml-msg{margin:0;font-size:.9rem;font-weight:600}.ml-msg.ok{color:var(--navy)}.ml-msg.err{color:#a33}
+.ml-alt{font-size:.82rem;color:var(--navy)}

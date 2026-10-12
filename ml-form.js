@@ -1,0 +1,2 @@
+document.querySelectorAll('form.ml-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var m=f.querySelector('.ml-msg'),b=f.querySelector('button');b.disabled=true;
+fetch(f.action,{method:'POST',body:new FormData(f)}).then(function(r){return r.json()}).then(function(d){if(d&&d.success){m.textContent=f.dataset.ok;m.className='ml-msg ok';f.querySelector('input[type=email]').value=''}else{throw 0}}).catch(function(){m.textContent=f.dataset.err;m.className='ml-msg err';b.disabled=false})})});

@@ -86,3 +86,4 @@ a{color:var(--navy);text-decoration-color:var(--amber);text-decoration-thickness
 .site-footer .fine{border-top:1px solid rgba(255,255,255,.12);margin-top:1.8rem;padding-top:1.1rem;font-size:.82rem}.fine a{color:#DCE4EF}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 .band .lm h3{color:var(--navy)}
+.art-body .hook{font-size:1.12em;line-height:1.6;font-weight:500;color:#1F3A5F}

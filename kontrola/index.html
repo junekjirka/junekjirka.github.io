@@ -1,0 +1,155 @@
+<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1F3A5F">
+<title>Kontrola e-shopu (prototyp) | ProductivityKitsEU</title><meta name="robots" content="noindex,nofollow"><meta name="googlebot" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css?v=2">
+<style>
+.kf{display:grid;gap:.8rem;margin:1.2rem 0} .kf input[type=url],.kf input[type=text]{width:100%;padding:.85rem 1rem;border:1px solid var(--line);border-radius:10px;font:inherit}
+.kf label.c{display:flex;gap:.5rem;align-items:flex-start;font-size:.92rem;color:var(--muted)} .kres{margin:1.5rem 0}
+.kscore{display:flex;gap:1rem;align-items:center;background:var(--card);box-shadow:var(--sh);border-radius:var(--r);padding:1rem 1.2rem}
+.kscore b{font:800 2.4rem/1 Montserrat,sans-serif;color:var(--navy)} .kf-item{background:var(--card);box-shadow:var(--sh);border-radius:var(--r);padding:1rem 1.2rem;margin:1rem 0;border-left:6px solid var(--line)}
+.kf-item.fail{border-color:#C0392B} .kf-item.warn{border-color:var(--amber)} .kf-item.ok{border-color:#2E8B57}
+.kbadge{display:inline-block;font-size:.75rem;font-weight:700;padding:.15rem .5rem;border-radius:99px;background:var(--off);margin-right:.4rem}
+.kf-item h3{margin:.2rem 0 .5rem;font-size:1.05rem} .kf-item p{margin:.35rem 0} .kf-item .src{font-size:.85rem;color:var(--muted)}
+.kmsg{padding:.8rem 1rem;border-radius:10px;background:var(--off)} .kdemo{background:#FFF4E0;border:1px dashed var(--amber-d);padding:.5rem .8rem;border-radius:10px;font-size:.9rem}
+</style></head><body><a class="skip" href="#main">Přeskočit na obsah</a><header class="site-header"><div class="in"><a class="brand" href="/"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#F2A541"/><polyline points="24,52 42,70 78,30" fill="none" stroke="#1F3A5F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ProductivityKits<b>EU</b></span></a><nav class="nav"><a href="/#clanky">Články</a><a href="/#produkty">Produkty</a><a href="/kontakt/">Kontakt</a></nav><span class="lang" aria-label="Jazyk"><a href="/" aria-current="true" lang="cs">CS</a><a href="/en/" hreflang="en" lang="en">EN</a></span><span class="hcta"><a class="btn sm" href="/#zdarma">Test za 15 minut</a></span></div></header><main id="main"><div class="art-hero"><div class="in narrow"><span class="kicker">Zkušební verze</span><h1>Kontrola e-shopu zdarma</h1>
+<p>Zadejte adresu svého e-shopu. Automaticky projdeme několik veřejných stránek (úvod a patičku, obchodní podmínky, kontakt, jeden produkt) a ukážeme skóre a 3 zjištění. Hlavní téma: tlačítko pro odstoupení od smlouvy, povinné od 1. 1. 2027.</p></div></div>
+<div class="art-body in narrow">
+<form class="kf" id="kf" novalidate><label for="kurl"><b>Adresa e-shopu</b></label><input id="kurl" name="url" type="text" inputmode="url" placeholder="www.vas-eshop.cz" required autocomplete="url">
+<label class="c"><input type="checkbox" id="kown" required> <span>Jsem provozovatel tohoto e-shopu nebo mám jeho souhlas s kontrolou.</span></label>
+<label class="c"><input type="checkbox" id="kdis" required> <span>Beru na vědomí, že jde o automatickou orientační kontrolu, nikoli o právní poradenství. <a href="#upozorneni">Upozornění</a></span></label>
+<div class="btns"><button class="btn" type="submit" id="kbtn">Zkontrolovat e-shop</button><button class="btn ghost" type="button" id="kdemo">Ukázka výsledku</button></div>
+<p class="small">Kontrola trvá asi 10–20 sekund. Načteme nejvýš 8 stránek, dodržujeme robots.txt a představujeme se jako ProductivityKitsEU. Nic nekupujeme ani neodesíláme a do e-shopu se nepřihlašujeme.</p></form>
+<div id="kout" class="kres" aria-live="polite"></div>
+<h2 id="upozorneni">Upozornění</h2>
+<div class="small" id="kdisclaimer"><p><b>Upozornění k automatické kontrole</b></p>
+<p>Kontrola e-shopu je bezplatný automatický nástroj provozovatele ProductivityKitsEU (Jiří Junek, IČO 86590189). Nejde o právní službu ani o právní poradenství a jejím výsledkem není právní posouzení vašeho e-shopu.</p>
+<p>Nástroj načte nejvýše 8 veřejně dostupných stránek zadané adresy (úvod, obchodní podmínky, kontakt, jeden produkt a stránku pro zobrazení objednávky) a hledá v nich vybrané údaje. Nevidí administraci, objednávkový proces, zákaznický účet ani obsah načítaný skripty. Výsledek proto může být neúplný nebo chybný. To, že jsme něco nenašli, neznamená, že to na webu chybí, a výsledek „v pořádku“ neznamená, že je e-shop v souladu s právními předpisy.</p>
+<p>Skóre je orientační ukazatel zpracovaný naší vlastní metodikou. Nejde o hodnocení orgánu dozoru ani o certifikaci.</p>
+<p>Odkazy na předpisy odpovídají stavu k datu uvedenému u výsledku. Předpisy se mění; před úpravou e-shopu ověřte aktuální znění a v konkrétních případech se obraťte na advokáta.</p>
+<p>Kontrolu spouštějte jen pro e-shop, který provozujete, nebo s jeho souhlasem. Nástroj respektuje robots.txt, představuje se jako ProductivityKitsEU a nic neodesílá. Zadanou adresu a výsledek uchováváme nejvýše 6 hodin v mezipaměti, aby se stejný e-shop nekontroloval opakovaně; jinak je neukládáme ani je nepředáváme třetím osobám.</p>
+<p>Provozovatel neodpovídá za škodu vzniklou rozhodnutím učiněným výhradně na základě výsledku této automatické kontroly.</p></div>
+</div></main><script>
+(function(){var API="https://productivitykits-kontrola.productivitykits.workers.dev", DEMO={
+ "ok": true,
+ "version": "0.1.0",
+ "url": "https://www.ukazkovy-eshop.cz/",
+ "platform": "Shoptet",
+ "checked_at": "2026-10-19T08:00:00+00:00",
+ "legal_verified_on": "2026-10-19",
+ "score": 55,
+ "counts": {
+  "ok": 3,
+  "warn": 6,
+  "fail": 1,
+  "unknown": 0,
+  "na": 0,
+  "info": 1
+ },
+ "free_findings": [
+  {
+   "id": "withdrawal_button",
+   "title": "Tlačítko pro odstoupení od smlouvy (od 1. 1. 2027)",
+   "status": "fail",
+   "weight": 3,
+   "saw": "Na kontrolovaných stránkách jsme nenašli tlačítko ani odkaz pro online odstoupení od smlouvy. Našli jsme jen formulář ke stažení (formular-odstoupeni.pdf), to samo o sobě online funkcí není.",
+   "why": "Od 1. 1. 2027 musí e-shop umožnit odstoupení od smlouvy uzavřené přes on-line rozhraní také tlačítkem nebo obdobným prvkem, zobrazeným výrazně, snadno přístupným po celou lhůtu a označeným nápisem „Odstoupit od smlouvy“ nebo jinou odpovídající jednoznačnou formulací. Spotřebitel pak potvrzuje „Potvrdit odstoupení od smlouvy“ a e-shop mu bez zbytečného odkladu potvrdí přijetí v textové podobě.",
+   "todo": "Připravte online funkci pro odstoupení a umístěte vstup na viditelné místo před 1. 1. 2027. Na Shoptetu: funkce Detail objednávky a stránka /moje-objednavka/ (Nastavení → Objednávky → Ostatní nastavení). Podle nápovědy Shoptetu nejde text systémového tlačítka upravit – zda jeho znění odpovídá požadavku zákona, posuďte s právníkem.",
+   "sources": [
+    {
+     "label": "§ 1830a občanského zákoníku, vložený zákonem č. 159/2026 Sb. (čl. V bod 2), účinnost 1. 1. 2027",
+     "url": "https://www.e-sbirka.cz/sb/2026/159",
+     "note": "Vyhlášeno 2. 9. 2026, účinnost 1. 1. 2027 (e-Sbírka). Ověřeno i na zakonyprolidi.cz/cs/2026-159.",
+     "key": "Z159"
+    },
+    {
+     "label": "Směrnice (EU) 2023/2673, čl. 1 bod 3 (nový čl. 11a směrnice 2011/83/EU – funkce pro odstoupení)",
+     "url": "https://eur-lex.europa.eu/eli/dir/2023/2673/oj",
+     "key": "EU2673"
+    }
+   ],
+   "limits": "Kontrolujeme jen veřejné stránky (úvod, patička, obchodní podmínky, produkt). Detail objednávky a zákaznický účet nevidíme a samotné odeslání odstoupení netestujeme."
+  },
+  {
+   "id": "vop_withdrawal",
+   "title": "Poučení o odstoupení v obchodních podmínkách",
+   "status": "warn",
+   "weight": 2,
+   "saw": "Obchodní podmínky obsahují poučení o 14denní lhůtě, ale nenašli jsme zmínku o online odstoupení ani o tom, kde ho najít.",
+   "why": "Od 1. 1. 2027 musí informace před uzavřením smlouvy u objednávek přes on-line rozhraní obsahovat i údaj o možnosti odstoupit tlačítkem a o jeho umístění. Vzorové poučení (NV č. 66/2026 Sb., účinné od 19. 6. 2026) pro to obsahuje větu „Můžete rovněž odstoupit od smlouvy online na […]“, kterou použijete, jakmile máte povinnost tlačítko poskytovat.",
+   "todo": "Před 1. 1. 2027 doplňte do poučení větu ze vzoru a adresu stránky s tlačítkem.",
+   "sources": [
+    {
+     "label": "§ 1820 odst. 1 písm. i) občanského zákoníku ve znění zákona č. 159/2026 Sb. (od 1. 1. 2027)",
+     "url": "https://www.e-sbirka.cz/sb/2026/159",
+     "key": "Z159_INFO"
+    },
+    {
+     "label": "Nařízení vlády č. 66/2026 Sb. (doplnění vzorového poučení o odstoupení online), účinnost 19. 6. 2026",
+     "url": "https://www.e-sbirka.cz/sb/2026/66",
+     "key": "NV66"
+    }
+   ],
+   "limits": ""
+  },
+  {
+   "id": "adr",
+   "title": "Mimosoudní řešení sporů (ADR) v obchodních podmínkách",
+   "status": "warn",
+   "weight": 1.5,
+   "saw": "Obchodní podmínky zmiňují mimosoudní řešení, ale nenašli jsme internetovou adresu subjektu (např. https://adr.coi.cz).",
+   "why": "Prodávající informuje o subjektu mimosoudního řešení spotřebitelských sporů včetně jeho internetové adresy, na webu a – pokud smlouva odkazuje na obchodní podmínky – i v nich.",
+   "todo": "Doplňte internetovou adresu subjektu ADR.",
+   "sources": [
+    {
+     "label": "§ 14 odst. 1 zákona č. 634/1992 Sb., o ochraně spotřebitele (informace o ADR na webu i v obchodních podmínkách, včetně internetové adresy subjektu)",
+     "url": "https://www.zakonyprolidi.cz/cs/1992-634#p14",
+     "key": "ZOS14"
+    }
+   ],
+   "limits": ""
+  }
+ ],
+ "hidden_findings": 4,
+ "pages": {
+  "home": "https://www.ukazkovy-eshop.cz/",
+  "vop": "https://www.ukazkovy-eshop.cz/vop/",
+  "contact": "https://www.ukazkovy-eshop.cz/contact/",
+  "product": "https://www.ukazkovy-eshop.cz/product/"
+ },
+ "skipped": {
+  "cart": {
+   "url": "https://www.ukazkovy-eshop.cz/kosik/",
+   "reason": "robots.txt"
+  }
+ },
+ "demo": true
+};
+var L={ok:"V pořádku",warn:"Zkontrolujte",fail:"Chybí",unknown:"Neověřeno",na:"Netýká se",info:"Informace"};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function item(f){var src=(f.sources||[]).map(function(s){return '<a href="'+esc(s.url)+'" rel="nofollow noopener" target="_blank">'+esc(s.label)+'</a>'}).join("<br>");
+ return '<article class="kf-item '+esc(f.status)+'"><span class="kbadge">'+esc(L[f.status]||f.status)+'</span><h3>'+esc(f.title)+'</h3>'+
+ '<p><b>Co jsme viděli:</b> '+esc(f.saw)+'</p>'+(f.why?'<p><b>Proč na tom záleží:</b> '+esc(f.why)+'</p>':'')+
+ (f.todo&&f.status!=="ok"?'<p><b>Co zkontrolovat:</b> '+esc(f.todo)+'</p>':'')+(f.limits?'<p class="src"><b>Omezení:</b> '+esc(f.limits)+'</p>':'')+
+ (src?'<p class="src"><b>Zdroj:</b><br>'+src+'</p>':'')+'</article>'}
+function render(r){var o=document.getElementById("kout");
+ if(!r.ok){o.innerHTML='<p class="kmsg">'+esc(r.error||"Kontrolu se nepodařilo dokončit.")+'</p>';return}
+ var d=new Date(r.checked_at);
+ o.innerHTML=(r.demo?'<p class="kdemo">Ukázka na smyšleném e-shopu – nejde o výsledek skutečného obchodu.</p>':'')+
+ '<div class="kscore"><b>'+esc(r.score)+'</b><div>z 100 bodů · '+esc(r.url)+(r.platform==="Shoptet"?' · Shoptet':'')+
+ '<br><span class="small">Kontrola '+esc(d.toLocaleString("cs-CZ",{timeZone:"Europe/Prague"}))+' · právní stav ověřen k '+esc(r.legal_verified_on.split("-").reverse().join(". "))+'</span></div></div>'+
+ r.free_findings.map(item).join("")+
+ (r.hidden_findings?'<p class="kmsg">+ '+esc(r.hidden_findings)+' další zjištění. Podrobný report připravujeme.</p>':'')+
+ '<p class="small">Zkontrolované stránky: '+Object.keys(r.pages).map(function(k){return esc(r.pages[k])}).join(", ")+
+ (r.skipped&&r.skipped.cart&&r.skipped.cart.reason==="robots.txt"?'. Košík jsme nenačítali, protože ho e-shop v robots.txt vylučuje.':'')+'</p>'}
+document.getElementById("kdemo").onclick=function(){render(DEMO)};
+if(location.hash==="#ukazka")render(DEMO);
+document.getElementById("kf").onsubmit=function(e){e.preventDefault();var o=document.getElementById("kout");
+ var u=document.getElementById("kurl").value.trim();
+ if(!u){o.innerHTML='<p class="kmsg">Zadejte adresu e-shopu.</p>';return}
+ if(!document.getElementById("kown").checked||!document.getElementById("kdis").checked){o.innerHTML='<p class="kmsg">Potvrďte prosím obě políčka.</p>';return}
+ if(!API){o.innerHTML='<p class="kmsg">Kontrola zatím není spuštěná. Mezitím si můžete prohlédnout <a href="#" onclick="document.getElementById(\'kdemo\').click();return false">ukázku výsledku</a>.</p>';return}
+ var b=document.getElementById("kbtn");b.disabled=true;o.innerHTML='<p class="kmsg">Kontroluji… (10–20 s)</p>';
+ fetch(API.replace(/\/$/,"")+"/check",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:u,owner:true})})
+ .then(function(r){return r.json()}).then(render).catch(function(){render({ok:false,error:"Kontrolu se nepodařilo spustit. Zkuste to prosím později."})})
+ .then(function(){b.disabled=false})};
+})();
+</script><footer class="site-footer"><div class="in"><div class="fcol"><a class="brand" href="/"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#F2A541"/><polyline points="24,52 42,70 78,30" fill="none" stroke="#1F3A5F" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></svg><span>ProductivityKits<b>EU</b></span></a><p>Praktické přehledy a pracovní pomůcky pro malé e-shopy. Každé tvrzení se zdrojem.</p></div><div class="fcol"><h2>Odkazy</h2><a href="/#clanky">Články</a><a href="/#produkty">Produkty</a><a href="/#zdarma">Rychlý test zdarma</a><a href="/kontakt/">Kontakt, reklamace a vrácení peněz</a><a href="/en/">English version</a></div><div class="fcol"><h2>Upozornění</h2><p>Obsah je obecná informace, nikoli právní poradenství. Stav k 12. 10. 2026. Předpisy se mění – ověřte aktuální znění ve zdrojích a v konkrétních případech se obraťte na advokáta.</p></div></div><div class="in fine">Provozovatel: Jiří Junek, IČO 86590189 · <a href="mailto:info@productivitykits.eu">info@productivitykits.eu</a> · Odkazované produkty jsou placené produkty provozovatele.</div></footer><script src="/ml-form.js" defer></script><!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e36cd16368e545a49420695448f5eb73"}'></script><!-- End Cloudflare Web Analytics --></body></html>
